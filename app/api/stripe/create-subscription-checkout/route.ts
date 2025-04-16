@@ -2,7 +2,7 @@ import stripe from "@/app/lib/stripe";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
-  const { testId, userEmail } = await req.json();
+  const { testId } = await req.json();
 
   const price = process.env.STRIPE_PRODUCT_PRICE_ID;
 
@@ -17,12 +17,12 @@ export async function POST(req: NextRequest) {
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [{ price, quantity: 1 }],
-      mode: "payment",
-      payment_method_types: ["card", "boleto", "paypal"],
+      mode: "subscription",
+      payment_method_types: ["card"],
       success_url: `${req.headers.get("origin")}/success`,
       cancel_url: `${req.headers.get("origin")}/`,
       metadata,
-      ...(userEmail && { customer_email: userEmail }),
+      //customer
     });
 
     if (!session.url) {
