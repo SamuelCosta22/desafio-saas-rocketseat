@@ -10,7 +10,7 @@ export default function Payments() {
   } = useStripe();
 
   return (
-    <div className="flex flex-col gap-10 items-center justify-between h-screen">
+    <div className="flex flex-col items-center justify-around min-h-screen">
       <h1 className="text-4xl font-bold">Pagamentos</h1>
       <button
         className="border rounded-md px-1 cursor-pointer"
@@ -23,12 +23,12 @@ export default function Payments() {
         onClick={() => createSubscriptionStripeCheckout({ testId: "123" })}
       >
         Criar Assinatura Stripe
-        <button
-          className="border rounded-md px-1 cursor-pointer"
-          onClick={handleCreateStripePortal}
-        >
-          Criar Portal de Pagamentos
-        </button>
+      </button>
+      <button
+        className="border rounded-md px-1 cursor-pointer"
+        onClick={handleCreateStripePortal}
+      >
+        Criar Portal de Pagamentos
       </button>
     </div>
   );
