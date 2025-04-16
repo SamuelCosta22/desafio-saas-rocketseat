@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   const { testId } = await req.json();
 
-  const price = process.env.STRIPE_PRODUCT_PRICE_ID;
+  const price = process.env.STRIPE_SUBCRIPTION_PRICE_ID;
 
   if (!price) {
     return NextResponse.json({ error: "Price not found." }, { status: 500 });
